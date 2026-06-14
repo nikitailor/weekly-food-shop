@@ -132,28 +132,29 @@ def is_logged_in(page) -> bool:
     return "authentication" not in page.url and page.query_selector("[data-test='account-menu']") is not None
 
 def dismiss_cookie_banner(page):
-    """Dismiss Ocado's cookie consent banner if present."""
-    for selector in [
+    """Wait for and dismiss Ocado's OneTrust cookie consent banner."""
+    cookie_selectors = [
         "button#onetrust-accept-btn-handler",
+        "button#accept-recommended-btn-handler",
         "button[id*='accept']",
-        "[class*='cookie'] button",
-        "[class*='consent'] button",
-    ]:
+        "[class*='cookie'] button[class*='accept']",
+    ]
+    for selector in cookie_selectors:
         try:
-            btn = page.query_selector(selector)
-            if btn and btn.is_visible():
-                btn.click()
-                human_delay(0.5, 1.0)
-                return
+            page.wait_for_selector(selector, timeout=8000, state="visible")
+            page.click(selector)
+            print("   ✅ Cookie banner dismissed.")
+            human_delay(1.0, 1.5)
+            return
         except Exception:
-            pass
+            continue
+    print("   (No cookie banner found — continuing.)")
 
 def login(page, email: str, password: str):
     print("🔐  Logging in to Ocado...")
-    page.goto(OCADO_LOGIN_URL, wait_until="domcontentloaded")
-    human_delay(3.0, 5.0)  # Give bot-detection JS time to settle
-    page.screenshot(path="login_page.png", full_page=True)
+    page.goto(OCADO_LOGIN_URL, wait_until="networkidle")
     print(f"   Page title: {page.title()} | URL: {page.url}")
+    page.screenshot(path="login_page.png", full_page=True)
     dismiss_cookie_banner(page)
 
     # Try multiple selectors for the email field
@@ -161,7 +162,7 @@ def login(page, email: str, password: str):
     filled = False
     for sel in email_selectors:
         try:
-            page.wait_for_selector(sel, timeout=10000, state="visible")
+            page.wait_for_selector(sel, timeout=20000, state="visible")
             page.fill(sel, email)
             filled = True
             break
