@@ -169,6 +169,22 @@ def login(page, email: str, password: str):
             continue
 
     if not filled:
+        # Dump all input fields and frames to help diagnose selector issues
+        inputs = page.query_selector_all("input")
+        print(f"   Found {len(inputs)} input element(s) on page:")
+        for inp in inputs:
+            print(f"     id={inp.get_attribute('id')} name={inp.get_attribute('name')} "
+                  f"type={inp.get_attribute('type')} autocomplete={inp.get_attribute('autocomplete')}")
+        frames = page.frames
+        print(f"   Found {len(frames)} frame(s): {[f.url for f in frames]}")
+        # Check inside any iframes for input fields
+        for frame in frames[1:]:
+            frame_inputs = frame.query_selector_all("input")
+            if frame_inputs:
+                print(f"   Frame {frame.url} has {len(frame_inputs)} input(s):")
+                for inp in frame_inputs:
+                    print(f"     id={inp.get_attribute('id')} name={inp.get_attribute('name')} "
+                          f"type={inp.get_attribute('type')}")
         page.screenshot(path="login_failed.png", full_page=True)
         raise RuntimeError("Could not find email field on Ocado login page. Screenshot saved as login_failed.png")
 
