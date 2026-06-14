@@ -131,13 +131,48 @@ def save_cookies(context):
 def is_logged_in(page) -> bool:
     return "authentication" not in page.url and page.query_selector("[data-test='account-menu']") is not None
 
+def dismiss_cookie_banner(page):
+    """Dismiss Ocado's cookie consent banner if present."""
+    for selector in [
+        "button#onetrust-accept-btn-handler",
+        "button[id*='accept']",
+        "[class*='cookie'] button",
+        "[class*='consent'] button",
+    ]:
+        try:
+            btn = page.query_selector(selector)
+            if btn and btn.is_visible():
+                btn.click()
+                human_delay(0.5, 1.0)
+                return
+        except Exception:
+            pass
+
 def login(page, email: str, password: str):
     print("🔐  Logging in to Ocado...")
-    page.goto(OCADO_LOGIN_URL, wait_until="networkidle")
-    page.fill("#email", email)
-    page.fill("#password", password)
+    page.goto(OCADO_LOGIN_URL, wait_until="domcontentloaded")
+    human_delay(1.5, 2.5)
+    dismiss_cookie_banner(page)
+
+    # Try multiple selectors for the email field
+    email_selectors = ["#email", "input[name='email']", "input[type='email']"]
+    filled = False
+    for sel in email_selectors:
+        try:
+            page.wait_for_selector(sel, timeout=10000, state="visible")
+            page.fill(sel, email)
+            filled = True
+            break
+        except Exception:
+            continue
+
+    if not filled:
+        page.screenshot(path="login_failed.png", full_page=True)
+        raise RuntimeError("Could not find email field on Ocado login page. Screenshot saved as login_failed.png")
+
+    page.fill("input[name='password'], #password, input[type='password']", password)
     page.click("[data-test='login-button'], button[type='submit']")
-    page.wait_for_url(lambda url: "authentication" not in url, timeout=15000)
+    page.wait_for_url(lambda url: "authentication" not in url, timeout=20000)
     print("✅  Logged in.")
 
 

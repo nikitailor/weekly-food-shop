@@ -38,3 +38,11 @@ jobs:
           OCADO_PASSWORD: ${{ secrets.OCADO_PASSWORD }}
           OCADO_HEADLESS: "true"
         run: python ocado_shopper.py
+
+      - name: Upload screenshots on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: "*.png"
+          if-no-files-found: ignore
