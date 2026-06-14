@@ -7,7 +7,7 @@ from types import ModuleType
 from unittest.mock import MagicMock
 
 # Stub missing optional dependencies so we can import the module
-for mod in ("keyring", "playwright", "playwright.sync_api"):
+for mod in ("playwright", "playwright.sync_api"):
     sys.modules.setdefault(mod, MagicMock())
 
 import ocado_shopper as oc

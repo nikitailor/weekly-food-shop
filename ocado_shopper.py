@@ -12,42 +12,24 @@ import re
 import time
 import random
 import json
-import keyring
 import os
 from datetime import datetime
 from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeout
 
 # ── Config ────────────────────────────────────────────────────────────────────
-REMINDERS_LIST   = "Food Shopping"
-KEYCHAIN_SERVICE = "ocado"
-SESSION_FILE     = os.path.expanduser("~/.ocado_session.json")
-LOG_DIR          = os.path.expanduser("~/ocado_logs")
-OCADO_URL        = "https://www.ocado.com"
-OCADO_LOGIN_URL  = "https://www.ocado.com/authentication?target=/"
-HEADLESS         = False   # Set True once you're happy it works reliably
+SHOPPING_LIST_FILE = os.path.join(os.path.dirname(__file__), "shopping_list.txt")
+SESSION_FILE       = os.path.expanduser("~/.ocado_session.json")
+LOG_DIR            = os.path.expanduser("~/ocado_logs")
+OCADO_URL          = "https://www.ocado.com"
+OCADO_LOGIN_URL    = "https://www.ocado.com/authentication?target=/"
+HEADLESS           = os.environ.get("OCADO_HEADLESS", "false").lower() == "true"
 
 
-# ── Reminders ────────────────────────────────────────────────────────────────
-def get_reminders(list_name: str) -> list[str]:
-    """Fetch incomplete reminders from a named Apple Reminders list via AppleScript."""
-    script = f'''
-    tell application "Reminders"
-        set theList to list "{list_name}"
-        set incompleteReminders to (reminders of theList whose completed is false)
-        set output to ""
-        repeat with r in incompleteReminders
-            set output to output & name of r & linefeed
-        end repeat
-        return output
-    end tell
-    '''
-    result = subprocess.run(
-        ["osascript", "-e", script],
-        capture_output=True, text=True
-    )
-    if result.returncode != 0:
-        raise RuntimeError(f"AppleScript error: {result.stderr.strip()}")
-    lines = [l.strip() for l in result.stdout.strip().splitlines() if l.strip()]
+# ── Shopping list ─────────────────────────────────────────────────────────────
+def get_shopping_list(path: str = SHOPPING_LIST_FILE) -> list[str]:
+    """Read items from shopping_list.txt — one item per line, # lines are comments."""
+    with open(path) as f:
+        lines = [l.strip() for l in f if l.strip() and not l.strip().startswith("#")]
     return lines
 
 
@@ -306,17 +288,18 @@ def process_item(page, item: dict, log: dict):
 # ── Main ──────────────────────────────────────────────────────────────────────
 def main():
     # 1. Credentials
-    email = input("Ocado email: ").strip()
-    password = keyring.get_password(KEYCHAIN_SERVICE, email)
-    if not password:
+    email    = os.environ.get("OCADO_EMAIL", "").strip()
+    password = os.environ.get("OCADO_PASSWORD", "").strip()
+    if not email or not password:
         raise RuntimeError(
-            f"No password found in Keychain for '{email}'.\n"
-            f"Run: python -c \"import keyring; keyring.set_password('ocado', '{email}', 'YOUR_PASSWORD')\""
+            "OCADO_EMAIL and OCADO_PASSWORD environment variables must be set.\n"
+            "Locally: export OCADO_EMAIL=you@example.com OCADO_PASSWORD=yourpassword\n"
+            "In GitHub Actions: add them as repository secrets."
         )
 
-    # 2. Reminders
-    print(f"\n📋  Reading '{REMINDERS_LIST}' reminders...")
-    raw_items = get_reminders(REMINDERS_LIST)
+    # 2. Shopping list
+    print(f"\n📋  Reading shopping list from {SHOPPING_LIST_FILE}...")
+    raw_items = get_shopping_list()
     if not raw_items:
         print("No incomplete reminders found. Nothing to do.")
         return

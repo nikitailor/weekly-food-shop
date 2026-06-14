@@ -1,0 +1,40 @@
+name: Ocado Shopper
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry run — print items but don't add to basket"
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
+
+jobs:
+  shop:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          pip install playwright
+          playwright install chromium
+          playwright install-deps chromium
+
+      - name: Run Ocado Shopper
+        env:
+          OCADO_EMAIL: ${{ secrets.OCADO_EMAIL }}
+          OCADO_PASSWORD: ${{ secrets.OCADO_PASSWORD }}
+          OCADO_HEADLESS: "true"
+        run: python ocado_shopper.py
