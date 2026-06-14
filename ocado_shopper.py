@@ -151,11 +151,13 @@ def dismiss_cookie_banner(page):
 def login(page, email: str, password: str):
     print("🔐  Logging in to Ocado...")
     page.goto(OCADO_LOGIN_URL, wait_until="domcontentloaded")
-    human_delay(1.5, 2.5)
+    human_delay(3.0, 5.0)  # Give bot-detection JS time to settle
+    page.screenshot(path="login_page.png", full_page=True)
+    print(f"   Page title: {page.title()} | URL: {page.url}")
     dismiss_cookie_banner(page)
 
     # Try multiple selectors for the email field
-    email_selectors = ["#email", "input[name='email']", "input[type='email']"]
+    email_selectors = ["#email", "input[name='email']", "input[type='email']", "[autocomplete='email']"]
     filled = False
     for sel in email_selectors:
         try:
@@ -345,12 +347,30 @@ def main():
 
     # 3. Browser
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=HEADLESS)
+        browser = p.chromium.launch(
+            headless=HEADLESS,
+            args=[
+                "--disable-blink-features=AutomationControlled",
+                "--no-sandbox",
+                "--disable-dev-shm-usage",
+            ],
+        )
         context = browser.new_context(
             user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
                        "AppleWebKit/537.36 (KHTML, like Gecko) "
-                       "Chrome/122.0.0.0 Safari/537.36"
+                       "Chrome/124.0.0.0 Safari/537.36",
+            viewport={"width": 1280, "height": 800},
+            locale="en-GB",
+            timezone_id="Europe/London",
+            java_script_enabled=True,
+            extra_http_headers={"Accept-Language": "en-GB,en;q=0.9"},
         )
+        # Hide webdriver flag that bot detectors look for
+        context.add_init_script("""
+            Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
+            Object.defineProperty(navigator, 'plugins', { get: () => [1, 2, 3] });
+            Object.defineProperty(navigator, 'languages', { get: () => ['en-GB', 'en'] });
+        """)
 
         # Load saved session if available
         loaded = load_cookies(context)

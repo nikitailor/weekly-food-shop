@@ -39,8 +39,8 @@ jobs:
           OCADO_HEADLESS: "true"
         run: python ocado_shopper.py
 
-      - name: Upload screenshots on failure
-        if: failure()
+      - name: Upload screenshots
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: screenshots
