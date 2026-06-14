@@ -1,0 +1,20 @@
+# Ocado Shopping List
+# One item per line. Supports:
+#   2x oat milk          → add 2
+#   500g chicken breast  → match closest pack to 500g
+#   berries              → add 1
+
+# ── Weekly staples ────────────────────────────────────────────────────────────
+berries
+bananas
+easy peel oranges
+full fat milk
+kefir
+soya yoghurt
+2x oat milk
+kimchi
+cheddar cheese
+sheep's cheese
+weetabix
+
+# ── Add your weekly items below ───────────────────────────────────────────────
