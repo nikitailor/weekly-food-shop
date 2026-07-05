@@ -65,11 +65,16 @@ Life admin is split with my husband. I am not the sole person responsible for ev
 
 Every week we plan:
 
-- **2 high-protein breakfast options** — 30g+ protein. No insulin spikes first thing. Max one tofu-based breakfast per week.
+- **Breakfast:** No cooked breakfast — protein shake with collagen and matcha, every day. No recipe planning needed for this.
 - **2 lunch options** — batch prepped, 4 portions each (2 for Niki, 2 for husband). 30g+ protein. Max 5–10 mins to assemble.
-  - **Lunch 1 — Sandwich/wrap filling:** A batch-prepped protein filling (e.g. shredded chicken, tuna smash, spiced turkey) that works with any bread, wrap or rice cakes. Keeps 3–4 days in the fridge.
-  - **Lunch 2 — Grain or pasta salad:** Cold, batch-prepped. Things like quinoa, orzo, farro or giant couscous with a protein source (fish, edamame, halloumi, legumes). Dressable the night before.
-- **3 dinner options** — cook once, eat twice (double batch = 4 adult portions + son's half portions). Each dinner made one night, reheated the next. 30g+ protein.
+  - **Lunch 1 — Salad:** Cold, batch-prepped grain or pasta salad. Things like quinoa, orzo, farro or giant couscous with a protein source (fish, edamame, halloumi, legumes). Dressable the night before.
+  - **Lunch 2 — Pitta/wrap:** A batch-prepped protein filling (e.g. shredded chicken, tuna smash, spiced turkey) that works with pitta, wrap or flatbread. Keeps 3–4 days in the fridge.
+  - At least **one of the two lunches must be vegetarian** each week.
+- **3 dinner options** — cook once, eat twice (double batch = 4 adult portions + son's half portions). Each dinner made one night, reheated the next. 30g+ protein. Fixed weekly format:
+  - **1 pasta dish**
+  - **1 rice or other grain dish**
+  - **1 traybake** — protein flexible (chicken, sausages/pork, fish, etc. — not fixed to chicken)
+  - At least **one of the three dinners must be vegetarian** each week.
 - **1 baking option** — refined sugar free, suitable for a toddler, **no chocolate**
 
 ### Cook once eat twice structure:
@@ -103,8 +108,6 @@ Every week we plan:
 - No repeat or similar meals in the same week — keep proteins, flavours and formats varied
 - Husband does **not** eat fish — always provide a meat swap for fish dishes (usually chicken)
 - Aim for **30g+ protein per meal**
-- No ingredients that cause insulin spikes first thing in the morning (breakfasts)
-- Only **one tofu-based breakfast** per week maximum
 
 ### Recipe sources:
 
@@ -133,18 +136,20 @@ Always include weights for meat, fish and protein items. Calculate based on port
 
 Output each week's plan in this format, titled "Week of [date]":
 
-**🥣 Breakfast Options**
+**🥤 Breakfast**
 
-- [ ] Recipe name — URL
+- Protein shake with collagen + matcha (daily — no recipe needed)
 
 **🥗 Lunch Options**
 
-- [ ] Filling name — brief description
-- [ ] Salad name — URL
+- [ ] Salad — Recipe name — URL
+- [ ] Pitta/Wrap — Filling name — brief description
 
 **🍽️ Dinner Options**
 
-- [ ] Day/Day — Recipe name (any swaps noted) — URL
+- [ ] Day/Day — Pasta: Recipe name — URL
+- [ ] Day/Day — Rice/Grain: Recipe name — URL
+- [ ] Day/Day — Traybake: Recipe name (any swaps noted) — URL
 
 **🧁 Mama Bakes**
 
