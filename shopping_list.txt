@@ -1,52 +1,49 @@
-# Ocado Shopping List — Week of 6th July 2026
+# Ocado Shopping List — Week of 6th July 2026 (heatwave — minimal cooking)
 # One item per line. Supports:
 #   2x oat milk          → add 2
 #   500g chicken breast  → match closest pack to 500g
 #   berries               → add 1
 
 # ── Meat & Fish ───────────────────────────────────────────────────────────────
-500g salmon fillets
-400g chicken breast
-12x pork sausages
+2x salmon fillets or 213g tin salmon x2
+300g chicken breast
+8x chicken sausages
 2x tuna tins in brine or water
 
 # ── Fruit & Veg ───────────────────────────────────────────────────────────────
 300g carrots
-2x bell peppers
-red onion
-1kg new potatoes
+3x bell peppers
+2x red onion
 onion
 2x garlic bulbs
-30g fresh ginger
-150g cherry tomatoes
-cucumber
+500g cherry tomatoes
+2x cucumber
 1/4 red cabbage
-fresh coriander
+fresh basil
 fresh parsley
 fresh dill
 2x avocado
 2x banana
+3x lemons
 
 # ── Chilled & Dairy ───────────────────────────────────────────────────────────
-60g feta
+150g feta
+50g parmesan
 180g greek yoghurt
 thick natural yoghurt
 frozen edamame 300g
 
 # ── Tins, Jars & Dried ────────────────────────────────────────────────────────
-3x chickpeas 400g tin
-2x chopped tomatoes 400g tin
-2x coconut milk 400ml tin
-passata 400g
-capers jar
-kalamata olives jar
+4x chickpeas 400g tin
+2x kalamata olives jar
+green pesto jar
 wholegrain mustard
 almond butter
 tamari or soy sauce
 honey
 150g quinoa
-500g basmati rice
-wholewheat pasta 500g
+250g bulgur wheat
+wholewheat pasta or fusilli 500g
 pitta breads or wraps
 
 # ── Baking ────────────────────────────────────────────────────────────────────
@@ -58,12 +55,8 @@ cinnamon
 
 # ── Spices & Store Cupboard ───────────────────────────────────────────────────
 # NOTE: Check stock before ordering — remove any you already have
-curry powder or garam masala
-ground turmeric
-ground cumin
-chilli flakes
 dried oregano
-smoked paprika
+chilli flakes
 olive oil
 
 # ── Weekly Staples ────────────────────────────────────────────────────────────

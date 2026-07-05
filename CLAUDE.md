@@ -170,11 +170,11 @@ Every **Thursday at 8pm** — Niki comes to Claude, says what's in the fridge an
 - **Dinners:** Sri Lankan curry (prawns for Niki/chicken for husband) / Emily English Tuscan salmon (chicken swap for husband) / Emily English Marry Me Chicken Orzo
 - **Bake:** Banana blueberry oat muffins
 
-### Week of 6th July 2026:
+### Week of 6th July 2026 (heatwave — minimal cooking, cooling foods):
 
 - **Breakfasts:** Protein shake with collagen + matcha (daily, no recipe)
 - **Lunches:** Turmeric quinoa & edamame salad with avocado / Emily English superfood tuna protein mix (pitta/wrap)
-- **Dinners:** Salmon puttanesca pasta (chicken swap for husband) / Coconut chickpea curry with rice / Sausage traybake with carrots and peppers
+- **Dinners:** Cold salmon pesto pasta salad (chicken swap for husband) / Mediterranean bulgur & chickpea salad / Quick chicken sausage Greek salad (no oven)
 - **Bake:** Applesauce oat muffins
 
 *Use this log to avoid repeating meals too soon. Build rotation over time.*
