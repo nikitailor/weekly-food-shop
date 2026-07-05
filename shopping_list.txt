@@ -1,87 +1,72 @@
-# Ocado Shopping List — Week of 15th June 2026
+# Ocado Shopping List — Week of 6th July 2026 (heatwave — minimal cooking)
 # One item per line. Supports:
 #   2x oat milk          → add 2
 #   500g chicken breast  → match closest pack to 500g
-#   berries              → add 1
+#   berries               → add 1
 
 # ── Meat & Fish ───────────────────────────────────────────────────────────────
-1kg chicken thighs bone-in skin-on
-700g chicken breast
-2x salmon fillets
+2x salmon fillets or 213g tin salmon x2
+300g chicken breast
+8x chicken sausages
+2x tuna tins in brine or water
 
 # ── Fruit & Veg ───────────────────────────────────────────────────────────────
 300g carrots
-800g cherry tomatoes
-2x roma tomatoes
-cucumber
-3x red onion
-2x bell peppers
-jalapeño
-3x red chillies
-30g fresh ginger
+3x bell peppers
+2x red onion
+onion
 2x garlic bulbs
-6x limes
-lemons
-2x ripe mango
-sweetcorn
-fresh mint
-fresh coriander
+500g cherry tomatoes
+2x cucumber
+1/4 red cabbage
+fresh basil
 fresh parsley
+fresh dill
 2x avocado
+2x banana
+3x lemons
 
 # ── Chilled & Dairy ───────────────────────────────────────────────────────────
-soya yoghurt large pot
-150g sheep's cheese
-400g feta
+150g feta
+50g parmesan
 180g greek yoghurt
-2x microwave brown rice 250g
+thick natural yoghurt
+frozen edamame 300g
 
 # ── Tins, Jars & Dried ────────────────────────────────────────────────────────
 4x chickpeas 400g tin
-black beans 400g tin
-roasted red peppers jar
-rose harissa paste
-tahini
+2x kalamata olives jar
+green pesto jar
+wholegrain mustard
+almond butter
+tamari or soy sauce
 honey
-tomato paste
-sherry vinegar
-500g basmati rice
-sourdough or rye bread
-2x tortilla chips
+150g quinoa
+250g bulgur wheat
+wholewheat pasta or fusilli 500g
+pitta breads or wraps
 
 # ── Baking ────────────────────────────────────────────────────────────────────
-175g almond flour
-500g gluten-free rolled oats
-60g chia seeds
-vanilla protein powder
-60g chopped dates or raisins
-coconut oil
-maple syrup
-arrowroot starch
-300g blueberries
+200g rolled oats
+unsweetened apple sauce (large jar)
+2x eggs
+baking powder
+cinnamon
 
 # ── Spices & Store Cupboard ───────────────────────────────────────────────────
 # NOTE: Check stock before ordering — remove any you already have
-kashmiri chilli powder
-cumin seeds
-ground cumin
-coriander seeds
-ground turmeric
+dried oregano
 chilli flakes
-smoked paprika
-garlic granules
-cinnamon
-mixed spice
-BBQ seasoning
-apple cider vinegar
+olive oil
 
 # ── Weekly Staples ────────────────────────────────────────────────────────────
 berries
-bananas
 easy peel oranges
 full fat milk
 kefir
+soya yoghurt
 2x oat milk
 kimchi
 cheddar cheese
+sheep's cheese
 weetabix
