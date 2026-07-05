@@ -159,6 +159,8 @@ Output each week's plan in this format, titled "Week of [date]":
 
 Every **Thursday at 8pm** — Niki comes to Claude, says what's in the fridge and any preferences, Claude generates full meal plan with real recipe links + complete Ocado shopping list added directly to Food Shopping reminders list.
 
+**Run this session in a local Claude session (desktop app or CLI on Niki's own device), not Claude Code on the web / a cloud sandbox.** Cloud sessions' network policy blocks outbound access to individual recipe sites, so recipe links can't be opened and verified before being handed over — only a local session with full web access can confirm a link actually resolves to the recipe described.
+
 -----
 
 ## 5. RECIPE ROTATION LOG
