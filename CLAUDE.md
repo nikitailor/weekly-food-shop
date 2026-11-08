@@ -65,7 +65,7 @@ Life admin is split with my husband. I am not the sole person responsible for ev
 
 Every week we plan:
 
-- **Breakfast:** No cooked breakfast — protein shake with collagen and matcha, every day. No recipe planning needed for this.
+- **Breakfast:** No cooked breakfast — protein shake, every day. No recipe planning needed for this.
 - **2 lunch options** — batch prepped, 4 portions each (2 for Niki, 2 for husband). 30g+ protein. Max 5–10 mins to assemble.
   - **Lunch 1 — Salad:** Cold, batch-prepped grain or pasta salad. Things like quinoa, orzo, farro or giant couscous with a protein source (fish, edamame, halloumi, legumes). Dressable the night before.
   - **Lunch 2 — Pitta/wrap:** A batch-prepped protein filling (e.g. shredded chicken, tuna smash, spiced turkey) that works with pitta, wrap or flatbread. Keeps 3–4 days in the fridge.
@@ -140,7 +140,7 @@ Output each week's plan in this format, titled "Week of [date]":
 
 **🥤 Breakfast**
 
-- Protein shake with collagen + matcha (daily — no recipe needed)
+- Protein shake (daily — no recipe needed)
 
 **🥗 Lunch Options**
 
