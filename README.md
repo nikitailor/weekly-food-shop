@@ -2,7 +2,7 @@
 
 Niki's weekly meal planning and Ocado shop. The plan and rules live in `CLAUDE.md`
 and the **meal-planning** Claude skill; the shopping list lives in Apple Reminders
-("Food Shopping").
+("Food Shopping"), with a read-only copy in `shopping_list.txt`.
 
 The Ocado trolley is filled by Claude through the **uk-grocery MCP**
 ([abracadabra50/uk-grocery-cli](https://github.com/abracadabra50/uk-grocery-cli)),
@@ -85,6 +85,17 @@ Check it worked without changing anything:
 ```bash
 node dist/cli.js --provider ocado basket
 ```
+
+---
+
+## shopping_list.txt
+
+A plain-text copy of this week's Food Shopping reminders list, so sessions that
+can't read Apple Reminders (like Claude Code on the web) can still see it. Claude
+writes it after adding the shopping list to Reminders, and **regenerates the whole
+file from Reminders** whenever it needs updating. Don't edit it by hand. Change the
+Reminders list instead and ask Claude to regenerate the file. Past weeks are in git
+history.
 
 ---
 

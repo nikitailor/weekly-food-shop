@@ -126,6 +126,7 @@ Always check in on store cupboard staples before assuming we have them. Ask what
 ### Shopping method:
 
 **Ocado delivery.** Shopping list lives in **Apple Reminders — "Food Shopping" list (shared with husband).**
+A plain-text copy is kept at **`shopping_list.txt`** in this repo. It's a one-way copy: always regenerate the whole file from the current state of the Food Shopping reminders list, never edit it by hand or from the meal plan, and never update Reminders from it. Reminders is the source of truth.
 Meal plan lives in **Apple Notes — "Food Plans" section (shared with husband).**
 
 **Ocado trolley fill:** Claude fills the Ocado trolley from the Food Shopping list via the **`uk-grocery` MCP** (installed on Niki's MacBook; setup in `README.md`). It's a separate approval checkpoint after the shopping list is added. Claude shows a match table and only adds items once Niki approves. Always pass `provider: "ocado"` (the MCP defaults to Sainsbury's). Never log in via the MCP, book slots, check out or clear the trolley — Niki reviews and checks out in the Ocado app herself. Full steps are in the meal-planning skill.
