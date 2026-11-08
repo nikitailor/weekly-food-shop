@@ -1,125 +1,107 @@
-# Ocado Shopper 🛒
+# Weekly Food Shop 🛒
 
-Reads your **Apple Reminders "Food Shopping" list** and adds everything to your Ocado basket automatically. Prefers your favourited products; falls back to top-rated with a review log.
+Niki's weekly meal planning and Ocado shop. The plan and rules live in `CLAUDE.md`
+and the **meal-planning** Claude skill; the shopping list lives in Apple Reminders
+("Food Shopping").
+
+The Ocado trolley is filled by Claude through the **uk-grocery MCP**
+([abracadabra50/uk-grocery-cli](https://github.com/abracadabra50/uk-grocery-cli)),
+run on the MacBook. Claude fills the trolley after you approve a match table, then
+stops. You review it, book a slot and check out in the Ocado app yourself.
+
+> This replaced the old `ocado_shopper.py` script and its GitHub Action, which were
+> removed in November 2026.
 
 ---
 
-## Setup (one time)
+## One-time setup (on the MacBook)
 
-### 1. Install dependencies
+### 1. Install the CLI at the reviewed version
 
 ```bash
-pip install playwright keyring
-playwright install chromium
+git clone https://github.com/abracadabra50/uk-grocery-cli.git && cd uk-grocery-cli && git checkout 6140a9e
 ```
-
-### 2. Store your Ocado password in macOS Keychain
 
 ```bash
-python -c "import keyring; keyring.set_password('ocado', 'your@email.com', 'yourpassword')"
+npm ci && npx playwright install chromium && npm run build
 ```
 
-You only need to do this once. Your password is stored encrypted in Keychain — never in the script.
+`6140a9e` (4 Nov 2026) is the commit that was security-reviewed. Use `npm ci`
+(not `npm install`) so the lockfile versions are used. Review the changes before
+pulling a newer version.
 
----
+### 2. Store the Ocado password in macOS Keychain
 
-## How to use
+Copy it from the Passwords app, then paste it at the hidden prompt:
 
 ```bash
-python ocado_shopper.py
+security add-generic-password -a n.tailor22@gmail.com -s ocado-groc -w
 ```
 
-It will ask for your email, retrieve the password from Keychain, then open a browser and start working through your list.
+If you change your Ocado password, update it with the same command plus `-U`.
 
----
+### 3. Connect the MCP
 
-## Reminders format
+Claude desktop app: go to **Settings → Developer → Edit Config** and add this under
+`"mcpServers"` (use `echo "$PWD/dist/mcp-server.js"` to get the path):
 
-The script parses quantities from your reminder names:
-
-| Format | Meaning |
-|---|---|
-| `2x oat milk` or `x2 oat milk` | Add 2 of this item |
-| `500g chicken breast` | Find closest pack to 500g |
-| `1kg salmon fillet` | Find closest pack to 1kg |
-| `berries` | Add 1, pick largest if weight-based |
-
-**Tips for better matching:**
-- Be specific: `alpro soya yoghurt` beats `yoghurt`
-- Favourite items on Ocado directly — the script will always prefer these
-- Over time your favourites do the heavy lifting
-
----
-
-## What it does
-
-1. Reads all **incomplete** reminders from "Food Shopping"
-2. Logs in to Ocado (reuses saved session if available)
-3. For each item:
-   - Searches Ocado
-   - ★ If a **favourited** result is found → adds it
-   - ⚠️ If not → adds top/best match, logs alternatives for your review
-4. Prints a summary and saves a log to `~/ocado_logs/`
-
-You then **review the basket** and place the order yourself.
-
----
-
-## Review log
-
-After running, you'll see a summary like:
-
-```
-✅  Added to basket (8 items):
-    • oat milk × 2 ★ favourite
-      Oatly Oat Drink Barista 1L | £1.80 | 1L | £1.80/L
-
-⚠️   Needs your review (2 items):
-
-    500g chicken breast — matched to 500g (no favourite)
-    Added: Waitrose British Chicken Breast 520g | £4.50 | £8.65/kg
-    Alternatives:
-      1. Ocado British Chicken Breast 300g | £2.80 | £9.33/kg
-      2. Waitrose British Chicken Breast 1kg | £8.00 | £8.00/kg
-
-    chicken thighs — no weight specified — picked largest available
-    Added: Waitrose British Chicken Thighs 1kg | £5.50 | £5.50/kg
-    Alternatives:
-      1. Waitrose British Chicken Thighs 500g | £3.20 | £6.40/kg
+```json
+"uk-grocery": {
+  "command": "node",
+  "args": ["/Users/<you>/.../uk-grocery-cli/dist/mcp-server.js"]
+}
 ```
 
-Full logs are saved as JSON in `~/ocado_logs/` for reference.
+Then set these tools to **Never allow**: `grocery_checkout`,
+`grocery_book_slot`, `grocery_basket_clear`, `grocery_login`.
 
----
+Claude Code CLI alternative:
 
-## Files
-
-| File | Purpose |
-|---|---|
-| `ocado_shopper.py` | Main script |
-| `~/.ocado_session.json` | Saved browser session (auto-created, permissions 600) |
-| `~/ocado_logs/` | Per-run review logs |
-
----
-
-## Settings
-
-At the top of `ocado_shopper.py`:
-
-```python
-HEADLESS = False   # Set True to run without a visible browser window
+```bash
+claude mcp add uk-grocery -s user -- node "$PWD/dist/mcp-server.js"
 ```
 
-Start with `False` so you can see what's happening. Switch to `True` once you're confident.
+Then add `deny` rules for `mcp__uk-grocery__grocery_checkout`,
+`mcp__uk-grocery__grocery_book_slot`, `mcp__uk-grocery__grocery_basket_clear` and
+`mcp__uk-grocery__grocery_login` to `~/.claude/settings.json`.
 
 ---
 
-## Troubleshooting
+## Logging in (first time, and whenever the session expires)
 
-**"No password found in Keychain"** — Re-run the keychain setup command in step 2.
+From the `uk-grocery-cli` folder:
 
-**Items not matching well** — Favourite the correct product on Ocado directly. Next run will pick it up.
+```bash
+SUPERMARKET_PASSWORD="$(security find-generic-password -s ocado-groc -a n.tailor22@gmail.com -w)" node dist/cli.js --provider ocado login -e n.tailor22@gmail.com
+```
 
-**Script breaks after Ocado update** — The selectors in `extract_product_info()` and `add_to_basket()` may need updating. Open an issue or tweak the CSS selectors to match the new layout.
+- Click **Allow** (not *Always Allow*) on the Keychain prompt.
+- A browser window opens Ocado's real login page. Type the emailed code into
+  Terminal if asked.
+- Only Ocado's cookies are saved, to `~/.ocado/session.json` (owner-only). The password is not saved there.
 
-**Session expired** — Delete `~/.ocado_session.json` and re-run. It will log in fresh.
+Check it worked without changing anything:
+
+```bash
+node dist/cli.js --provider ocado basket
+```
+
+---
+
+## Weekly use
+
+In the Thursday food planning session (local desktop app or CLI, not a cloud session),
+after the shopping list is added to Reminders, Claude:
+
+1. Reads the Food Shopping list and skips headers, items you already have, and
+   anything already in the trolley.
+2. Searches your Ocado favourites first, then all products, matching meat and fish
+   weights.
+3. Shows a match table (★ favourite / ⚠️ check) and **waits for your approval**.
+4. Adds the approved items and reports the trolley total.
+
+You then review, book a slot and check out in the Ocado app.
+
+**Limits:** Ocado slot booking and checkout aren't supported by the tool, and the
+tool uses Ocado's unofficial site APIs, so it can break if Ocado changes their site.
+Keep use to one trolley fill a week.
