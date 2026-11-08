@@ -128,6 +128,8 @@ Always check in on store cupboard staples before assuming we have them. Ask what
 **Ocado delivery.** Shopping list lives in **Apple Reminders — "Food Shopping" list (shared with husband).**
 Meal plan lives in **Apple Notes — "Food Plans" section (shared with husband).**
 
+**Ocado trolley fill:** Claude fills the Ocado trolley from the Food Shopping list via the **`uk-grocery` MCP** (installed on Niki's MacBook; setup in `README.md`). It's a separate approval checkpoint after the shopping list is added. Claude shows a match table and only adds items once Niki approves. Always pass `provider: "ocado"` (the MCP defaults to Sainsbury's). Never log in via the MCP, book slots, check out or clear the trolley — Niki reviews and checks out in the Ocado app herself. Full steps are in the meal-planning skill.
+
 ### Shopping list format:
 
 Always include weights for meat, fish and protein items. Calculate based on portion sizes above.
@@ -236,7 +238,7 @@ Every **Thursday at 8pm** — Niki comes to Claude, says what's in the fridge an
 - **Subscriptions audit** — needs a proper review
 - **When I Die folder** — in progress, Week 1 complete ✅ (14th March 2026)
 - **Will** — needs to be sorted. Week 2 of When I Die folder (30th March) is the prompt. Options: solicitor, Farewill, Bequeathed.
-- **Ocado automation script** — building Python + Playwright script. Session booked Thursday 26th March 8pm in Niki's Calendar.
+- **Ocado automation** — ✅ replaced the Python + Playwright script with the `uk-grocery` MCP (November 2026). Old script and GitHub Action removed.
 
 ### Insurance & financial overview:
 
@@ -359,7 +361,7 @@ Social life has taken a hit since having a toddler. Wants gentle prompting to st
 |Cleaner                  |Wednesdays 11:40am–2:40pm                 |
 |Nursery invoices         |Niki receives these                       |
 |Denplan                  |Via work — denplan.co.uk/employeeonline   |
-|Ocado automation session |Thursday 26th March 8pm                   |
+|Ocado trolley fill       |`uk-grocery` MCP — see README.md          |
 |Food planning session    |Every Thursday 8pm                        |
 |Finances review          |1st Thursday of month 8pm                 |
 |When I Die folder        |Week 2 due 30th March                     |
